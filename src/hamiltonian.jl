@@ -1,6 +1,0 @@
-module hamiltonian
-
-
-
-end
-
