@@ -1,0 +1,10 @@
+name = "SpinSim"
+version = "0.0.1"
+uuid="a9872f58-4f48-11ef-0c06-ff7f93bd3947"
+
+[deps]
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+
+[compat]
+julia = "1.10.4"
+
