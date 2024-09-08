@@ -78,6 +78,7 @@ end
 
 
 function construct_hamiltonian( list_operators::Array{Tuple{Float64, String},1}, spins::Array{Float64,1} )
+
   size = Integer( prod( 2*spins .+ 1 ) )
   base = zeros( (size, size) )
 
