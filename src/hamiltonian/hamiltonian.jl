@@ -7,6 +7,7 @@ function delta_kronecker( i::Int, j::Int )
     return 1
   end
   return 0
+  base = zeros( (size, size) )
 end
 
 
@@ -16,7 +17,7 @@ function x_matrix( size::Int )
 
   for a in 1:size
     for b in 1:size
-      base[a][b] = 0.5*(delta_kronecker(a, b+1) + delta_kronecker(a+1, b))*sqrt( (spin+1)*(a+b-1) -a*b )
+      base[a, b] = 0.5*(delta_kronecker(a, b+1) + delta_kronecker(a+1, b))*sqrt( (spin+1)*(a+b-1) -a*b )
     end
   end
 
@@ -28,7 +29,7 @@ function y_matrix( size::Int )
   base = zeros( (size, size) )
   for a in 1:size
     for b in 1:size
-      base[a][b] = 0.5im*(delta_kronecker(a, b+1) - delta_kronecker(a+1, b))*sqrt( (spin+1)*(a+b-1) -a*b )
+      base[a, b] = 0.5im*(delta_kronecker(a, b+1) - delta_kronecker(a+1, b))*sqrt( (spin+1)*(a+b-1) -a*b )
     end
   end
 
@@ -36,10 +37,10 @@ end
 
 function z_matrix( size::Int )
   spin = (size-1)/2.0
-  base = zeros( (size, size) )
+  base = zeros( ComplexF64, size, size )
   for a in 1:size
     for b in 1:size
-      base[a][b] = delta_kronecker(a, b)*(spin+1-a) 
+      base[a, b] = delta_kronecker(a, b)*(spin+1-a) 
     end
   end
 
@@ -53,8 +54,8 @@ end
 
 function pauli_matrices( spin::Float64 )
   matrix_size = Integer( 2*spin +1 )
-  dict = Dict( "I"=>i_matrix( matrix_size ), "X"=>x_matrix( matrix_size ),
-      "Y"=>y_matrix( matrix_size ), "Z"=>z_matrix( matrix_size ) )
+  dict = Dict( 'I'=>i_matrix( matrix_size ), 'X'=>x_matrix( matrix_size ),
+      'Y'=>y_matrix( matrix_size ), 'Z'=>z_matrix( matrix_size ) )
   return dict
 end
 
@@ -77,8 +78,7 @@ function construct_term( operator::String, spins::Array{Float64,1} )
 end
 
 
-function construct_hamiltonian( list_operators::Array{Tuple{Float64, String},1}, spins::Array{Float64,1} )
-
+function construct_hamiltonian( list_operators::Array{Tuple{Float64, String},1}, spins::Vector{Float64} )
   size = Integer( prod( 2*spins .+ 1 ) )
   base = zeros( (size, size) )
 

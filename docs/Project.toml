@@ -1,0 +1,4 @@
+[deps]
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+SpinSim = "a9872f58-4f48-11ef-0c06-ff7f93bd3947"
+
