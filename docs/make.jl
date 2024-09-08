@@ -1,5 +1,4 @@
 using Documenter
-
 makedocs(
     sitename = "SpinSim.jl",
     pages=[
