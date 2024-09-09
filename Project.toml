@@ -1,9 +1,11 @@
 name = "SpinSim"
+author = ["Javier Norambuena"]
 version = "0.0.1"
 uuid="a9872f58-4f48-11ef-0c06-ff7f93bd3947"
 
 [deps]
 LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"  
 
 [compat]
 julia = "1.10.4"
