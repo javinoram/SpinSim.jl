@@ -4,6 +4,7 @@ makedocs(
     sitename = "SpinSim.jl",
     pages=[
       "Home" => "index.md"
+      "Hamiltonian Module" => "hamiltonian.md"
     ])
 
 deploydocs(; 
