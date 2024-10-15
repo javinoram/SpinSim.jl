@@ -1,20 +1,17 @@
-using LinearAlgebra
-
 module hamiltonian
+using LinearAlgebra
 
 function delta_kronecker( i::Int, j::Int )
   if (i==j)
     return 1
   end
   return 0
-  base = zeros( (size, size) )
 end
 
 
 function x_matrix( size::Int )
   spin = (size-1)/2.0
-  base = zeros( (size, size) )
-
+  base = zeros(ComplexF64, size, size )
   for a in 1:size
     for b in 1:size
       base[a, b] = 0.5*(delta_kronecker(a, b+1) + delta_kronecker(a+1, b))*sqrt( (spin+1)*(a+b-1) -a*b )
@@ -26,13 +23,13 @@ end
 
 function y_matrix( size::Int )
   spin = (size-1)/2.0
-  base = zeros( (size, size) )
+  base = zeros(ComplexF64, size, size )
   for a in 1:size
     for b in 1:size
       base[a, b] = 0.5im*(delta_kronecker(a, b+1) - delta_kronecker(a+1, b))*sqrt( (spin+1)*(a+b-1) -a*b )
     end
   end
-
+  return base
 end
 
 function z_matrix( size::Int )
@@ -43,11 +40,11 @@ function z_matrix( size::Int )
       base[a, b] = delta_kronecker(a, b)*(spin+1-a) 
     end
   end
-
+  return base
 end
 
 function i_matrix( size::Int )
-  base = Matrix{Float64}(I, size, size)
+  base = Matrix{ComplexF64}(LinearAlgebra.I, size, size)
   return base
 end
 

@@ -1,6 +1,12 @@
 using Test
-using SpimSim
+using LinearAlgebra
+using SpinSim
 
-@testset "MyPackage tests" begin
-    @test 1==1
+
+@testset begin
+    filenames = ["matrix_test.jl"]
+    for filename in filenames
+        t = @elapsed include(filename)
+        println("$(filename): $t sec")
+    end
 end
