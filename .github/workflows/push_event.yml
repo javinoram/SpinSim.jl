@@ -3,8 +3,7 @@ name: Push Event Workflow and test
 on: 
   push:
     branches:
-      - master
-      - main
+      - "*"
 
 permissions:
   actions: write
@@ -14,15 +13,10 @@ jobs:
   test:
     runs-on: ${{ matrix.os }}
     strategy:
-      fail-fast: false
       matrix:
-        os:
-          - ubuntu-latest
-        julia-version:
-          - lts
-        julia-arch:
-          - x64
-          - x86
+        os: [ubuntu-latest]
+        julia-version: ['lts']
+        julia-arch: [x64, x86]
         exclude:
           - os: macOS-lastest
             julia-arch: x86
@@ -31,8 +25,8 @@ jobs:
       - uses: actions/checkout@v4
       - uses: julia-actions/setup-julia@v2
         with:
-          version: ${{ matrix.version }}
-          arch: ${{ matrix.arch }}
+          version: ${{ matrix.julia-version }}
+          arch: ${{ matrix.julia-arch }}
       - uses: julia-actions/cache@v2
       - uses: julia-actions/julia-buildpkg@v1
       - uses: julia-actions/julia-runtest@v1
