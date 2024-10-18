@@ -17,3 +17,24 @@ using LinearAlgebra
       @test real( sum( [1 0 0; 0 0 0; 0 0 -1] - SpinSim.hamiltonian.z_matrix(3) ) ) ≤ ϵ
     end
 end
+
+@testset "Spin operators" begin
+  ϵ = 1e-7
+  
+  #tests with three 0.5 spin system XII, ZII and YII 
+  @testset "Single operators" begin
+    matrix_z = 0.5*[1 0 0 0 0 0 0 0; 0 1 0 0 0 0 0 0; 0 0 1 0 0 0 0 0; 0 0 0 1 0 0 0 0; 0 0 0 0 -1 0 0 0; 0 0 0 0 0 -1 0 0; 0 0 0 0 0 0 -1 0; 0 0 0 0 0 0 0 -1]
+    matrix_x = 0.5*[0 0 0 0 1 0 0 0; 0 0 0 0 0 1 0 0; 0 0 0 0 0 0 1 0; 0 0 0 0 0 0 0 1; 1 0 0 0 0 0 0 0; 0 1 0 0 0 0 0 0; 0 0 1 0 0 0 0 0; 0 0 0 1 0 0 0 0]
+    matrix_y = 0.5im*[0 0 0 0 -1 0 0 0; 0 0 0 0 0 -1 0 0; 0 0 0 0 0 0 -1 0; 0 0 0 0 0 0 0 -1; 1 0 0 0 0 0 0 0; 0 1 0 0 0 0 0 0; 0 0 1 0 0 0 0 0; 0 0 0 1 0 0 0 0]
+
+    @test matrix_z == SpinSim.hamiltonian.construct_term( "ZII", [0.5, 0.5, 0.5] )
+    @test matrix_x == SpinSim.hamiltonian.construct_term( "XII", [0.5, 0.5, 0.5] )
+    @test matrix_y == SpinSim.hamiltonian.construct_term( "YII", [0.5, 0.5, 0.5] )
+  end
+  
+  #tests with three 0.5 spin system XII, ZII and YII  
+  @testset "Double operators" begin
+    @test 1==1 
+  end
+  
+end
