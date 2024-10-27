@@ -17,9 +17,6 @@ jobs:
         os: [ubuntu-latest]
         julia-version: ['lts']
         julia-arch: [x64, x86]
-        exclude:
-          - os: macOS-lastest
-            julia-arch: x86
 
     steps:
       - uses: actions/checkout@v4
