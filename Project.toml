@@ -1,6 +1,6 @@
 name = "SpinSim"
 author = ["Javier Norambuena"]
-version = "0.0.1"
+version = "0.1.0"
 uuid="a9872f58-4f48-11ef-0c06-ff7f93bd3947"
 
 [deps]
